@@ -1,0 +1,5 @@
+@font-face {
+    font-family: "Pretendard";   /*Can be any text*/
+    src: local("Pretendard"),
+      url("Shared/Fonts/PretendardStd-Regular.otf") format("opentype");
+  }

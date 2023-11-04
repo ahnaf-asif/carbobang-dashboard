@@ -1,0 +1,1 @@
+export { GreenBackground } from './GreenBackground';
