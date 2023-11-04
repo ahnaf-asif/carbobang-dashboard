@@ -1,4 +1,4 @@
-import { Button } from '@mantine/core';
+import { Button, Drawer } from '@mantine/core';
 import styled from 'styled-components';
 
 import { darkGreen, defaultGreen, lightGreen } from '@/Config';
@@ -17,4 +17,25 @@ export const StyledDashboardButton = styled(Button)<{ active: string; mt?: numbe
     background: ${defaultGreen};
     border: none;
   }
+`;
+
+export const StyledDashboardDrawer = styled(Drawer)`
+color: white;
+
+.mantine-Drawer-close {
+  color: white;
+}
+
+.mantine-Drawer-header {
+  background: rgb(0, 39, 41);
+}
+
+.mantine-Drawer-content {
+  background: linear-gradient(
+    186deg,
+    rgba(0, 39, 41, 1) 47%,
+    rgba(0, 65, 55, 1) 99%,
+    rgba(0, 106, 78, 1) 100%
+  );
+}
 `;
