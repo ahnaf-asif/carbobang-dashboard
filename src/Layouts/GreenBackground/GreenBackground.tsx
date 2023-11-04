@@ -1,4 +1,4 @@
-import { AppShell, Box, Burger } from '@mantine/core';
+import { ActionIcon, AppShell, Box, Burger } from '@mantine/core';
 import {
   StyledAppShell,
   StyledRadialRedLeftSvgBox,
@@ -9,6 +9,7 @@ import {
 } from './GreenBackground.styles';
 
 import { RadialRedLeftSvg, RadialRedRightSvg } from './Assets';
+import { IconChevronLeft, IconChevronsLeft, IconMenu, IconMenu2 } from '@tabler/icons-react';
 
 type Props = {
   children: React.ReactNode;
@@ -28,8 +29,12 @@ export const GreenBackground = ({
   return (
     <StyledAppShell>
       <StyledAppShellHeader hiddenFrom="sm">
-        <Burger opened={leftMenuOpened} onClick={toggleLeftMenu} size="md" color="white" />
-        <Burger opened={rightMenuOpened} onClick={toggleRightMenu} size="md" color="white" />
+        <ActionIcon onClick={toggleLeftMenu} variant="transparent" aria-label="Projects Menu" size={'lg'}>
+          <IconMenu2 color="white" style={{ height: '100%', width: '100%' }} />
+        </ActionIcon>
+        <ActionIcon onClick={toggleRightMenu} variant="transparent" aria-label="Indexes Menu" size={'xl'}>
+          <IconChevronsLeft color="white" style={{ height: '100%', width: '100%' }} />
+        </ActionIcon>
       </StyledAppShellHeader>
       <AppShell.Main>
         {children}
