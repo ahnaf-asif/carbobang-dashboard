@@ -1,4 +1,4 @@
-import { AppShell, Box } from '@mantine/core';
+import { AppShell, AppShellHeader, Box } from '@mantine/core';
 import styled from 'styled-components';
 
 export const StyledAppShell = styled(AppShell)`
@@ -12,6 +12,15 @@ export const StyledAppShell = styled(AppShell)`
   .mantine-AppShell-main {
     overflow: hidden !important;
   }
+`;
+
+export const StyledAppShellHeader = styled(AppShellHeader)`
+  background: transparent;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 4px;
 `;
 
 export const StyledRadialRedLeftSvgBox = styled(Box)`

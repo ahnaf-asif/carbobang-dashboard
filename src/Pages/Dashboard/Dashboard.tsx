@@ -1,13 +1,30 @@
-import { Box, Button, Flex, Stepper, Text } from '@mantine/core';
+import { Box, Drawer, Flex, Paper, Stack, Stepper, Text } from '@mantine/core';
 import { useState } from 'react';
 import { GreenBackground } from '@/Layouts';
-import { StyledDashboardButton } from './Styles';
+import { StyledDashboardButton, StyledDashboardDrawer } from './Styles';
+import { useDisclosure } from '@mantine/hooks';
 
 export const Dashboard = () => {
   const [active, setActive] = useState(0);
+  const [leftMenuOpened, { toggle: toggleLeftMenu }] = useDisclosure();
+  const [rightMenuOpened, { toggle: toggleRightMenu }] = useDisclosure();
   return (
-    <GreenBackground>
+    <GreenBackground
+      leftMenuOpened={leftMenuOpened}
+      toggleLeftMenu={toggleLeftMenu}
+      rightMenuOpened={rightMenuOpened}
+      toggleRightMenu={toggleRightMenu}
+    >
       <Flex style={{ minHeight: '100vh', minWidth: '100vw' }} align="center" justify="space-around">
+        {/* For Smaller Screen: Project drawer */}
+        <StyledDashboardDrawer opened={leftMenuOpened} onClose={toggleLeftMenu} title="Projects">
+          <Stack mt={50} c="white">
+            <Text size="xl">Sonadia Mangrove Project</Text>
+            <Text size="xl">Project 2</Text>
+            <Text size="xl">Project 3</Text>
+          </Stack>
+        </StyledDashboardDrawer>
+
         <Box visibleFrom="sm" style={{ color: 'white', fontSize: '20px' }}>
           <Stepper
             iconPosition="right"
@@ -26,6 +43,22 @@ export const Dashboard = () => {
             Map will be placed here
           </Text>
         </Box>
+
+        {/* For Smaller Screen: Index drawer */}
+        <StyledDashboardDrawer
+          opened={rightMenuOpened}
+          onClose={toggleRightMenu}
+          position="right"
+          title="Indexes"
+        >
+          <Stack mt={50} c="white">
+            <Text size="xl">Greenness Index</Text>
+            <Text size="xl">Wetness Index</Text>
+            <Text size="xl">Carbon Sequestration Level</Text>
+            <Text size="xl">Financial Impact</Text>
+          </Stack>
+        </StyledDashboardDrawer>
+
         <Box visibleFrom="sm">
           {/*@ts-ignore*/}
           <StyledDashboardButton active="true">Greenness Index</StyledDashboardButton>
