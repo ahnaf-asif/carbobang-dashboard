@@ -28,15 +28,25 @@ export const GreenBackground = ({
 }: Props) => {
   return (
     <StyledAppShell>
-      <StyledAppShellHeader hiddenFrom="sm">
-        <ActionIcon onClick={toggleLeftMenu} variant="transparent" aria-label="Projects Menu" size={'lg'}>
+      <StyledAppShellHeader hiddenFrom="lg">
+        <ActionIcon
+          onClick={toggleLeftMenu}
+          variant="transparent"
+          aria-label="Projects Menu"
+          size={'lg'}
+        >
           <IconMenu2 color="white" style={{ height: '100%', width: '100%' }} />
         </ActionIcon>
-        <ActionIcon onClick={toggleRightMenu} variant="transparent" aria-label="Indexes Menu" size={'xl'}>
+        <ActionIcon
+          onClick={toggleRightMenu}
+          variant="transparent"
+          aria-label="Indexes Menu"
+          size={'xl'}
+        >
           <IconChevronsLeft color="white" style={{ height: '100%', width: '100%' }} />
         </ActionIcon>
       </StyledAppShellHeader>
-      <AppShell.Main>
+      <AppShell.Main style={{ position: 'relative' }}>
         {children}
         <Box visibleFrom="sm">
           <StyledRadialRedLeftSvgBox>

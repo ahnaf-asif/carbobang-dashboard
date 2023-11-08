@@ -25,7 +25,7 @@ export const Dashboard = () => {
           </Stack>
         </StyledDashboardDrawer>
 
-        <Box visibleFrom="sm" style={{ color: 'white', fontSize: '20px' }}>
+        <Box visibleFrom="lg" style={{ color: 'white', fontSize: '20px' }}>
           <Stepper
             iconPosition="right"
             size="xs"
@@ -59,7 +59,7 @@ export const Dashboard = () => {
           </Stack>
         </StyledDashboardDrawer>
 
-        <Box visibleFrom="sm">
+        <Box visibleFrom="lg">
           {/*@ts-ignore*/}
           <StyledDashboardButton active="true">Greenness Index</StyledDashboardButton>
           <br />
