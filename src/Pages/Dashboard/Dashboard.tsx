@@ -4,17 +4,25 @@ import { GreenBackground } from '@/Layouts';
 import { StyledDashboardButton, StyledDashboardDrawer } from './Styles';
 import { useDisclosure } from '@mantine/hooks';
 
-export const Dashboard = () => {
-  const [active, setActive] = useState(0);
-  const [leftMenuOpened, { toggle: toggleLeftMenu }] = useDisclosure();
-  const [rightMenuOpened, { toggle: toggleRightMenu }] = useDisclosure();
+type Props = {
+  leftMenuOpened: boolean;
+  toggleLeftMenu: () => void;
+  active: number;
+  setActive: (active: number) => void;
+  rightMenuOpened: boolean;
+  toggleRightMenu: () => void;
+};
+
+export const Dashboard = ({
+  leftMenuOpened,
+  toggleLeftMenu,
+  active,
+  setActive,
+  rightMenuOpened,
+  toggleRightMenu
+}: Props) => {
   return (
-    <GreenBackground
-      leftMenuOpened={leftMenuOpened}
-      toggleLeftMenu={toggleLeftMenu}
-      rightMenuOpened={rightMenuOpened}
-      toggleRightMenu={toggleRightMenu}
-    >
+    <>
       <Flex style={{ minHeight: '100vh', minWidth: '100vw' }} align="center" justify="space-around">
         {/* For Smaller Screen: Project drawer */}
         <StyledDashboardDrawer opened={leftMenuOpened} onClose={toggleLeftMenu} title="Projects">
@@ -79,6 +87,6 @@ export const Dashboard = () => {
           </StyledDashboardButton>
         </Box>
       </Flex>
-    </GreenBackground>
+    </>
   );
 };

@@ -22,6 +22,8 @@
     "@mantine/hooks": "^7.1.5",
     "@mantine/modals": "^7.1.5",
     "@mantine/notifications": "^7.1.5",
+    "@react-three/drei": "^9.88.11",
+    "@react-three/fiber": "^8.15.10",
     "@reduxjs/toolkit": "^1.9.2",
     "@tabler/icons-react": "^2.19.0",
     "@types/node": "^18.11.18",
@@ -37,7 +39,8 @@
     "react-redux": "^8.0.5",
     "react-router-dom": "^6.8.0",
     "redux": "^4.2.1",
-    "styled-components": "^5.3.9"
+    "styled-components": "^5.3.9",
+    "three": "^0.158.0"
   },
   "devDependencies": {
     "@types/lodash": "^4.14.191",

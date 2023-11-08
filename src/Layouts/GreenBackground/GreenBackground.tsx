@@ -1,4 +1,4 @@
-import { ActionIcon, AppShell, Box, Burger } from '@mantine/core';
+import { ActionIcon, AppShell, Box } from '@mantine/core';
 import {
   StyledAppShell,
   StyledRadialRedLeftSvgBox,
@@ -9,21 +9,17 @@ import {
 } from './GreenBackground.styles';
 
 import { RadialRedLeftSvg, RadialRedRightSvg } from './Assets';
-import { IconChevronLeft, IconChevronsLeft, IconMenu, IconMenu2 } from '@tabler/icons-react';
+import { IconChevronsLeft, IconMenu2 } from '@tabler/icons-react';
 
 type Props = {
   children: React.ReactNode;
-  leftMenuOpened: boolean;
   toggleLeftMenu: () => void;
-  rightMenuOpened: boolean;
   toggleRightMenu: () => void;
 };
 
 export const GreenBackground = ({
   children,
-  leftMenuOpened,
   toggleLeftMenu,
-  rightMenuOpened,
   toggleRightMenu
 }: Props) => {
   return (
