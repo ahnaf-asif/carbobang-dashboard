@@ -37,9 +37,8 @@ export default function Hero3DModel() {
         <primitive
           object={obj}
           scale={0.5}
-          position={[0, 0, 0]}
           map={colorMap}
-          rotation={[0, 0, 0]}
+          rotation={[2, 2, 0]}
         />
         <meshStandardMaterial map={colorMap} />
         <OrbitControls />

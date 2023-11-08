@@ -1,16 +1,14 @@
 import { GreenBackground } from '@/Layouts';
 import Hero3DModel from '@/Shared/Components/Hero3DModel/Hero3DModel';
-import { Box, Container, Stack, Text, Title } from '@mantine/core';
+import { Box, Button, Container, Stack, Text, Title } from '@mantine/core';
 import { Dashboard } from './Dashboard';
 import { useState } from 'react';
 import { useDisclosure } from '@mantine/hooks';
+import { Link } from 'react-router-dom';
 
 export const Home = () => {
-  const [active, setActive] = useState(0);
-  const [leftMenuOpened, { toggle: toggleLeftMenu }] = useDisclosure();
-  const [rightMenuOpened, { toggle: toggleRightMenu }] = useDisclosure();
   return (
-    <GreenBackground toggleLeftMenu={toggleLeftMenu} toggleRightMenu={toggleRightMenu}>
+    <GreenBackground>
       <Container>
         <Stack justify="center" align="center" h={'30vh'} c="white" mt={40}>
           <Title order={1} ta="center">
@@ -20,19 +18,16 @@ export const Home = () => {
             We use satellites & machine learning technology to finance forest protection in
             Bangladesh
           </Title>
+          <Link to="/dashboard">
+            <Button size="lg" tt={'uppercase'}>
+              Go To Dashboard
+            </Button>
+          </Link>
         </Stack>
         <Box h={'60vh'} w={'100%'}>
           <Hero3DModel />
         </Box>
       </Container>
-      <Dashboard
-        leftMenuOpened={leftMenuOpened}
-        toggleLeftMenu={toggleLeftMenu}
-        active={active}
-        setActive={setActive}
-        rightMenuOpened={rightMenuOpened}
-        toggleRightMenu={toggleRightMenu}
-      />
     </GreenBackground>
   );
 };
