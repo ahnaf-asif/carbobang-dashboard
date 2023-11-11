@@ -1,7 +1,7 @@
 import * as THREE from 'three';
 import { Canvas } from '@react-three/fiber';
 import { useLoader } from '@react-three/fiber';
-import { Html, useProgress } from '@react-three/drei';
+import { CameraControls, Html, useProgress } from '@react-three/drei';
 import { Environment, OrbitControls } from '@react-three/drei';
 import { TextureLoader } from 'three/src/loaders/TextureLoader';
 import { OBJLoader } from 'three/examples/jsm/loaders/OBJLoader';
@@ -30,18 +30,17 @@ export default function Hero3DModel() {
   });
 
   return (
-    <Canvas>
+    <Canvas camera={{ position: [0, 0, 4], fov: 100 }}>
       <Suspense fallback={<Loader />}>
         <ambientLight intensity={0.2} />
         <directionalLight />
         <primitive
           object={obj}
-          scale={0.5}
+          scale={0.1}
           map={colorMap}
-          rotation={[2, 2, 0]}
         />
         <meshStandardMaterial map={colorMap} />
-        <OrbitControls />
+        <OrbitControls minPolarAngle={Math.PI / 2} maxPolarAngle={Math.PI / 2} enableZoom={true} enablePan={false} maxZoom={0.2} zoom0={0.1}/>
         <Environment preset="sunset" />
       </Suspense>
     </Canvas>

@@ -9,7 +9,7 @@ import { Link } from 'react-router-dom';
 export const Home = () => {
   return (
     <GreenBackground>
-      <Container>
+      <Container size="xl">
         <Stack justify="center" align="center" h={'30vh'} c="white" mt={40}>
           <Title order={1} ta="center">
             CarboBang: Measurable Forest Protection
@@ -24,10 +24,10 @@ export const Home = () => {
             </Button>
           </Link>
         </Stack>
-        <Box h={'60vh'} w={'100%'}>
+      </Container>
+      <Box h={'60vh'} w={'100%'}>
           <Hero3DModel />
         </Box>
-      </Container>
     </GreenBackground>
   );
 };
