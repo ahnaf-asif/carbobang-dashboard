@@ -3,7 +3,6 @@ import GeoRasterLayer from 'georaster-layer-for-leaflet';
 import parse_georaster from 'georaster';
 import L, { CRS } from 'leaflet';
 import 'leaflet/dist/leaflet.css';
-import 'leaflet-geotiff';
 
 export default function DashboardMap({}) {
   useEffect(() => {
