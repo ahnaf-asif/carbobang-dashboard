@@ -2,6 +2,7 @@ import { AppShell, AppShellHeader, Box } from '@mantine/core';
 import styled from 'styled-components';
 
 export const StyledAppShell = styled(AppShell)`
+  overflow: hidden !important;
   background: rgb(0, 39, 41);
   background: linear-gradient(
     186deg,

@@ -1,23 +1,25 @@
 import { Box, Drawer, Flex, Paper, Stack, Stepper, Text } from '@mantine/core';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { GreenBackground } from '@/Layouts';
 import { StyledDashboardButton, StyledDashboardDrawer } from './Styles';
 import { useDisclosure } from '@mantine/hooks';
+import DashboardMap from '@/Shared/Components/DashboardMap/DashboardMap';
 
 export const Dashboard = () => {
   const [active, setActive] = useState(0);
   const [leftMenuOpened, { toggle: toggleLeftMenu }] = useDisclosure();
   const [rightMenuOpened, { toggle: toggleRightMenu }] = useDisclosure();
+
   return (
-    <GreenBackground
-      leftMenuOpened={leftMenuOpened}
-      toggleLeftMenu={toggleLeftMenu}
-      rightMenuOpened={rightMenuOpened}
-      toggleRightMenu={toggleRightMenu}
-    >
+    <GreenBackground toggleLeftMenu={toggleLeftMenu} toggleRightMenu={toggleRightMenu}>
       <Flex style={{ minHeight: '100vh', minWidth: '100vw' }} align="center" justify="space-around">
         {/* For Smaller Screen: Project drawer */}
-        <StyledDashboardDrawer opened={leftMenuOpened} onClose={toggleLeftMenu} title="Projects">
+        <StyledDashboardDrawer
+          opened={leftMenuOpened}
+          onClose={toggleLeftMenu}
+          title="Projects"
+          zIndex={1000}
+        >
           <Stack mt={50} c="white">
             <Text size="xl">Sonadia Mangrove Project</Text>
             <Text size="xl">Project 2</Text>
@@ -25,7 +27,7 @@ export const Dashboard = () => {
           </Stack>
         </StyledDashboardDrawer>
 
-        <Box visibleFrom="sm" style={{ color: 'white', fontSize: '20px' }}>
+        <Box visibleFrom="lg" style={{ color: 'white', fontSize: '20px' }}>
           <Stepper
             iconPosition="right"
             size="xs"
@@ -38,10 +40,9 @@ export const Dashboard = () => {
             <Stepper.Step label="Project 3" />
           </Stepper>
         </Box>
+
         <Box style={{ background: 'darkgreen', height: '400px', width: '650px', color: 'white' }}>
-          <Text mt={20} ml={20}>
-            Map will be placed here
-          </Text>
+          <DashboardMap />
         </Box>
 
         {/* For Smaller Screen: Index drawer */}
@@ -50,6 +51,7 @@ export const Dashboard = () => {
           onClose={toggleRightMenu}
           position="right"
           title="Indexes"
+          zIndex={1000}
         >
           <Stack mt={50} c="white">
             <Text size="xl">Greenness Index</Text>
@@ -59,7 +61,7 @@ export const Dashboard = () => {
           </Stack>
         </StyledDashboardDrawer>
 
-        <Box visibleFrom="sm">
+        <Box visibleFrom="lg">
           {/*@ts-ignore*/}
           <StyledDashboardButton active="true">Greenness Index</StyledDashboardButton>
           <br />
