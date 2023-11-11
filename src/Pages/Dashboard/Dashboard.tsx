@@ -5,7 +5,27 @@ import { StyledDashboardButton, StyledDashboardDrawer } from './Styles';
 import { useDisclosure } from '@mantine/hooks';
 import DashboardMap from '@/Shared/Components/DashboardMap/DashboardMap';
 
+const geotiffFileArray = [
+  {
+    label: 'Greenness Index',
+    file: '/ndvi/ndvi_boundary_rgb.tif'
+  },
+  {
+    label: 'Wetness Index',
+    file: '/ndwi/ndwi_boundary_rgb.tif'
+  },
+  {
+    label: 'Carbon Sequestration Level',
+    file: '/ndvi/ndvi_boundary_rgb2.tif'
+  },
+  {
+    label: 'Financial Impact',
+    file: '/ndvi/ndvi_boundary_rgb3.tif'
+  }
+];
+
 export const Dashboard = () => {
+  const [geotiffFile, setGeoTiffFile] = useState('');
   const [active, setActive] = useState(0);
   const [leftMenuOpened, { toggle: toggleLeftMenu }] = useDisclosure();
   const [rightMenuOpened, { toggle: toggleRightMenu }] = useDisclosure();
@@ -42,7 +62,7 @@ export const Dashboard = () => {
         </Box>
 
         <Box style={{ background: 'darkgreen', height: '400px', width: '650px', color: 'white' }}>
-          <DashboardMap />
+          <DashboardMap geotiffFile={geotiffFile} />
         </Box>
 
         {/* For Smaller Screen: Index drawer */}
@@ -54,31 +74,36 @@ export const Dashboard = () => {
           zIndex={1000}
         >
           <Stack mt={50} c="white">
-            <Text size="xl">Greenness Index</Text>
-            <Text size="xl">Wetness Index</Text>
-            <Text size="xl">Carbon Sequestration Level</Text>
-            <Text size="xl">Financial Impact</Text>
+            {geotiffFileArray.map((file) => (
+              <Text
+                key={file.file}
+                size="xl"
+                onClick={() => {
+                  toggleRightMenu();
+                  setGeoTiffFile(file.file);
+                }}
+                style={{ cursor: 'pointer' }}
+              >
+                {file.label}
+              </Text>
+            ))}
           </Stack>
         </StyledDashboardDrawer>
 
         <Box visibleFrom="lg">
-          {/*@ts-ignore*/}
-          <StyledDashboardButton active="true">Greenness Index</StyledDashboardButton>
-          <br />
-          {/*@ts-ignore*/}
-          <StyledDashboardButton mt={20} active="false">
-            Wetness Index
-          </StyledDashboardButton>
-          <br />
-          {/*@ts-ignore*/}
-          <StyledDashboardButton mt={20} active="false">
-            Carbon Sequestration Level
-          </StyledDashboardButton>
-          <br />
-          {/*@ts-ignore*/}
-          <StyledDashboardButton mt={20} active="false">
-            Financial Impact
-          </StyledDashboardButton>
+          {geotiffFileArray.map((file) => (
+            <>
+              {/*@ts-ignore*/}
+              <StyledDashboardButton
+                mt={20}
+                active={file.file == geotiffFile ? 'true' : 'false'}
+                onClick={() => setGeoTiffFile(file.file)}
+              >
+                {file.label}
+              </StyledDashboardButton>
+              <br />
+            </>
+          ))}
         </Box>
       </Flex>
     </GreenBackground>

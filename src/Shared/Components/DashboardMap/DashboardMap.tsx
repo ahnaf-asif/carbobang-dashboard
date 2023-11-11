@@ -1,18 +1,16 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import GeoRasterLayer from 'georaster-layer-for-leaflet';
 import parse_georaster from 'georaster';
 import L, { CRS } from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 
-export default function DashboardMap({}) {
+export default function DashboardMap({ geotiffFile }: { geotiffFile: string }) {
   useEffect(() => {
     const map = L.map('mapid', {
       crs: CRS.Simple
     });
 
-    var url_to_geotiff_file = '/ndwi/ndwi_boundary_rgb.tif';
-
-    fetch(url_to_geotiff_file)
+    fetch(geotiffFile)
       .then((response) => response.arrayBuffer())
       .then((arrayBuffer) => {
         console.log('ONE');
@@ -33,7 +31,7 @@ export default function DashboardMap({}) {
     return () => {
       map.remove();
     };
-  }, []);
+  }, [geotiffFile]);
 
   return <div id="mapid" style={{ width: '100%', height: '100%' }} />;
 }
