@@ -2,12 +2,12 @@ import { Box, Center, Text, Title } from '@mantine/core';
 
 import { notFoundJpg } from '@/Shared/Images';
 import { StyledNotFoundImg } from '@/Pages/NotFound/NotFound.styles';
-import { StyledLink } from '@/Shared/Components';
+import { Link } from 'react-router-dom';
 
 export const NotFound = () => {
   return (
     <Box
-      sx={{
+      style={{
         height: '100vh',
         width: '100vw',
         display: 'flex',
@@ -20,13 +20,11 @@ export const NotFound = () => {
           <StyledNotFoundImg src={notFoundJpg} alt="Page Not Found" />
         </Center>
         <Center>
-          <Text align="center" size={20}>
-            The page you were looking for couldn't be found{' '}
-          </Text>
+          <Text ta="center">The page you were looking for couldn't be found </Text>
         </Center>
         <Center>
-          <Text align="center" mt={20} size={20} weight="bold">
-            Please go back to <StyledLink to="/">Home Page</StyledLink>
+          <Text ta="center" mt={20} fw="bold">
+            Please go back to <Link to="/">Home Page</Link>
           </Text>
         </Center>
       </Box>

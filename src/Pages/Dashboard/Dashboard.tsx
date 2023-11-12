@@ -1,69 +1,70 @@
-import { Box, Drawer, Flex, Paper, Stack, Stepper, Text } from '@mantine/core';
-import { useEffect, useState } from 'react';
+import { ActionIcon, Box, Flex, Group, Image, Stack, Text, Title } from '@mantine/core';
+import { Fragment, useState } from 'react';
 import { GreenBackground } from '@/Layouts';
 import { StyledDashboardButton, StyledDashboardDrawer } from './Styles';
 import { useDisclosure } from '@mantine/hooks';
 import DashboardMap from '@/Shared/Components/DashboardMap/DashboardMap';
+import { IconChevronsLeft } from '@tabler/icons-react';
 
 const geotiffFileArray = [
   {
-    label: 'Greenness Index',
-    file: '/ndvi/ndvi_boundary_rgb.tif'
+    label: 'Individual tree identification',
+    file: '/trees/trees.tif',
+    button: '/legend/button_1.png',
+    text: 'The values indicate tree heights in meters'
   },
   {
-    label: 'Wetness Index',
-    file: '/ndwi/ndwi_boundary_rgb.tif'
+    label: 'Tree carbon level',
+    file: '/carbon/carbon.tif',
+    button: '/legend/button_2.png',
+    text: 'The values indicate the carbon sequestration level in kg per tree'
   },
   {
-    label: 'Carbon Sequestration Level',
-    file: '/ndvi/ndvi_boundary_rgb2.tif'
+    label: 'Greenness index',
+    file: '/ndvi/ndvi_boundary_rgb.tif',
+    button: '/legend/button_3.png',
+    text: 'The values indicate the health of the trees and range between -1 to +1. The higher the value the better the tree’s health'
   },
   {
-    label: 'Financial Impact',
-    file: '/ndvi/ndvi_boundary_rgb3.tif'
+    label: 'Wetness index',
+    file: '/ndwi/ndwi_boundary_rgb.tif',
+    button: '/legend/button_4.png',
+    text: 'The values indicate the water content of the trees and can range between -1 to +1. The higher the value the better the tree’s water content'
   }
 ];
 
 export const Dashboard = () => {
-  const [geotiffFile, setGeoTiffFile] = useState('');
-  const [active, setActive] = useState(0);
-  const [leftMenuOpened, { toggle: toggleLeftMenu }] = useDisclosure();
+  const [geotiffFile, setGeoTiffFile] = useState<{
+    label: string;
+    file: string;
+    button: string;
+    text: string;
+  }>(geotiffFileArray[0]);
   const [rightMenuOpened, { toggle: toggleRightMenu }] = useDisclosure();
 
   return (
-    <GreenBackground toggleLeftMenu={toggleLeftMenu} toggleRightMenu={toggleRightMenu}>
-      <Flex style={{ minHeight: '100vh', minWidth: '100vw' }} align="center" justify="space-around">
-        {/* For Smaller Screen: Project drawer */}
-        <StyledDashboardDrawer
-          opened={leftMenuOpened}
-          onClose={toggleLeftMenu}
-          title="Projects"
-          zIndex={1000}
+    <GreenBackground>
+      <Stack hiddenFrom="lg" align="flex-end">
+        <ActionIcon
+          onClick={toggleRightMenu}
+          variant="transparent"
+          aria-label="Indexes Menu"
+          size={'xl'}
         >
-          <Stack mt={50} c="white">
-            <Text size="xl">Sonadia Mangrove Project</Text>
-            <Text size="xl">Project 2</Text>
-            <Text size="xl">Project 3</Text>
+          <IconChevronsLeft color="white" style={{ height: '100%', width: '100%' }} />
+        </ActionIcon>
+      </Stack>
+      <Title my={60} c="white" ta="center" order={2}>
+        DMRV for Tree Plantation in Polk County, Texas, US
+      </Title>
+      <Flex align="center" justify="space-around">
+        <Group gap={10} align="end">
+          <Image src={geotiffFile?.button} alt="Button 1" w={'100'} mb={30} />
+          <Stack style={{ height: '500px', width: '800px', color: 'white' }}>
+            <DashboardMap geotiffFile={geotiffFile} />
+            <Text>{geotiffFile.text}</Text>
           </Stack>
-        </StyledDashboardDrawer>
-
-        <Box visibleFrom="lg" style={{ color: 'white', fontSize: '20px' }}>
-          <Stepper
-            iconPosition="right"
-            size="xs"
-            active={active}
-            onStepClick={setActive}
-            orientation="vertical"
-          >
-            <Stepper.Step label="Sonadia Mangrove Project" />
-            <Stepper.Step label="Project 2" />
-            <Stepper.Step label="Project 3" />
-          </Stepper>
-        </Box>
-
-        <Box style={{ background: 'darkgreen', height: '400px', width: '650px', color: 'white' }}>
-          <DashboardMap geotiffFile={geotiffFile} />
-        </Box>
+        </Group>
 
         {/* For Smaller Screen: Index drawer */}
         <StyledDashboardDrawer
@@ -80,7 +81,7 @@ export const Dashboard = () => {
                 size="xl"
                 onClick={() => {
                   toggleRightMenu();
-                  setGeoTiffFile(file.file);
+                  setGeoTiffFile(file);
                 }}
                 style={{ cursor: 'pointer' }}
               >
@@ -92,17 +93,17 @@ export const Dashboard = () => {
 
         <Box visibleFrom="lg">
           {geotiffFileArray.map((file) => (
-            <>
+            <Fragment key={file.file}>
               {/*@ts-ignore*/}
               <StyledDashboardButton
                 mt={20}
-                active={file.file == geotiffFile ? 'true' : 'false'}
-                onClick={() => setGeoTiffFile(file.file)}
+                active={file.file == geotiffFile?.file ? 'true' : 'false'}
+                onClick={() => setGeoTiffFile(file)}
               >
                 {file.label}
               </StyledDashboardButton>
               <br />
-            </>
+            </Fragment>
           ))}
         </Box>
       </Flex>

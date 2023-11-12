@@ -40,7 +40,7 @@ export default function Hero3DModel() {
           map={colorMap}
         />
         <meshStandardMaterial map={colorMap} />
-        <OrbitControls minPolarAngle={Math.PI / 2} maxPolarAngle={Math.PI / 2} enableZoom={true} enablePan={false} maxZoom={0.2} zoom0={0.1}/>
+        <OrbitControls enableZoom={true} enablePan={false} maxZoom={0.2} zoom0={0.1}/>
         <Environment preset="sunset" />
       </Suspense>
     </Canvas>
