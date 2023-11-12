@@ -62,5 +62,16 @@
     "react-app-rewired": "^2.2.1",
     "typescript": "^4.9.3",
     "vite": "^4.1.0"
+  },
+  "overrides": {
+    "georaster-layer-for-leaflet": {
+      "proj4-fully-loaded": "^0.2.0"
+    },
+    "reproject-geojson": {
+      "proj4-fully-loaded": "^0.2.0"
+    },
+    "reproject-bbox": {
+      "proj4-fully-loaded": "^0.2.0"
+    }
   }
 }
