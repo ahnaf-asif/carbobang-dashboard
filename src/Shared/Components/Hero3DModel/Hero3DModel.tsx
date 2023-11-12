@@ -1,7 +1,7 @@
 import * as THREE from 'three';
 import { Canvas } from '@react-three/fiber';
 import { useLoader } from '@react-three/fiber';
-import { CameraControls, Html, useProgress } from '@react-three/drei';
+import { Html, useProgress } from '@react-three/drei';
 import { Environment, OrbitControls } from '@react-three/drei';
 import { TextureLoader } from 'three/src/loaders/TextureLoader';
 import { OBJLoader } from 'three/examples/jsm/loaders/OBJLoader';
