@@ -17,23 +17,28 @@ export default function DashboardMap({
     fetch(geotiffFile.file)
       .then((response) => response.arrayBuffer())
       .then((arrayBuffer) => {
-        parse_georaster(arrayBuffer).then((georaster: any) => {
-          var layer = new GeoRasterLayer({
-            georaster: georaster,
-            opacity: 1,
-            resolution: 128
-          });
-          layer.addTo(map);
+        try {
+          parse_georaster &&
+            parse_georaster(arrayBuffer).then((georaster: any) => {
+              var layer = new GeoRasterLayer({
+                georaster: georaster,
+                opacity: 1,
+                resolution: 128
+              });
+              layer.addTo(map);
 
-          const originalBounds = layer.getBounds();
+              const originalBounds = layer.getBounds();
 
-          // Define the padding ratio (adjust as needed)
-          const paddingRatio = 0.5; // 50% extra space
+              // Define the padding ratio (adjust as needed)
+              const paddingRatio = 0.5; // 50% extra space
 
-          const paddedBounds = originalBounds.pad(paddingRatio);
+              const paddedBounds = originalBounds.pad(paddingRatio);
 
-          map.fitBounds(paddedBounds);
-        });
+              map.fitBounds(paddedBounds);
+            });
+        } catch (error) {
+          console.log(error);
+        }
       });
 
     return () => {
