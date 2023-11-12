@@ -34,7 +34,6 @@ export const loginUser = createAsyncThunk(
 
       return user;
     } catch (e) {
-      console.log(e);
       const message = 'The email or password is incorrect';
       return rejectWithValue(message);
     }

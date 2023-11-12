@@ -1,1 +1,0 @@
-export { StPeriodsTable } from './StPeriodsTable';

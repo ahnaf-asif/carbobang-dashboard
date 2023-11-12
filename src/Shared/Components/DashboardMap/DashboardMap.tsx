@@ -4,19 +4,20 @@ import parse_georaster from 'georaster';
 import L, { CRS } from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 
-export default function DashboardMap({ geotiffFile }: { geotiffFile: string }) {
+export default function DashboardMap({
+  geotiffFile
+}: {
+  geotiffFile: { label: string; file: string; button: string; text: string };
+}) {
   useEffect(() => {
     const map = L.map('mapid', {
       crs: CRS.Simple
-    });
+    }).setZoom(0);
 
-    fetch(geotiffFile)
+    fetch(geotiffFile.file)
       .then((response) => response.arrayBuffer())
       .then((arrayBuffer) => {
-        console.log('ONE');
         parse_georaster(arrayBuffer).then((georaster: any) => {
-          console.log('georaster:', georaster);
-
           var layer = new GeoRasterLayer({
             georaster: georaster,
             opacity: 1,
@@ -24,7 +25,14 @@ export default function DashboardMap({ geotiffFile }: { geotiffFile: string }) {
           });
           layer.addTo(map);
 
-          map.fitBounds(layer.getBounds());
+          const originalBounds = layer.getBounds();
+
+          // Define the padding ratio (adjust as needed)
+          const paddingRatio = 0.5; // 50% extra space
+
+          const paddedBounds = originalBounds.pad(paddingRatio);
+
+          map.fitBounds(paddedBounds);
         });
       });
 
