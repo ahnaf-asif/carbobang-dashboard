@@ -1,7 +1,6 @@
 import * as THREE from 'three';
 import { Canvas } from '@react-three/fiber';
 import { useLoader } from '@react-three/fiber';
-import { Html, useProgress } from '@react-three/drei';
 import { Environment, OrbitControls } from '@react-three/drei';
 import { TextureLoader } from 'three/src/loaders/TextureLoader';
 import { OBJLoader } from 'three/examples/jsm/loaders/OBJLoader';
@@ -10,11 +9,6 @@ import { DDSLoader } from 'three-stdlib';
 import { Suspense } from 'react';
 
 THREE.DefaultLoadingManager.addHandler(/\.dds$/i, new DDSLoader());
-
-function Loader() {
-  const { progress } = useProgress();
-  return <Html center>{progress} % loaded</Html>;
-}
 
 export default function Hero3DModel() {
   const [colorMap, normalMap, roughnessMap, metalnessMap] = useLoader(TextureLoader, [
@@ -31,16 +25,12 @@ export default function Hero3DModel() {
 
   return (
     <Canvas camera={{ position: [0, 0, 4], fov: 100 }}>
-      <Suspense fallback={<Loader />}>
+      <Suspense>
         <ambientLight intensity={0.2} />
         <directionalLight />
-        <primitive
-          object={obj}
-          scale={0.1}
-          map={colorMap}
-        />
+        <primitive object={obj} scale={0.1} map={colorMap} />
         <meshStandardMaterial map={colorMap} />
-        <OrbitControls enableZoom={true} enablePan={false} maxZoom={0.2} zoom0={0.1}/>
+        <OrbitControls enableZoom={true} enablePan={false} maxZoom={0.2} zoom0={0.1} />
         <Environment preset="sunset" />
       </Suspense>
     </Canvas>

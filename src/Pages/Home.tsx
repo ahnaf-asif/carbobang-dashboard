@@ -1,10 +1,9 @@
+import { Suspense, lazy } from 'react';
 import { GreenBackground } from '@/Layouts';
-import Hero3DModel from '@/Shared/Components/Hero3DModel/Hero3DModel';
-import { Box, Button, Container, Stack, Text, Title } from '@mantine/core';
-import { Dashboard } from './Dashboard';
-import { useState } from 'react';
-import { useDisclosure } from '@mantine/hooks';
+const Hero3DModel = lazy(() => import('@/Shared/Components/Hero3DModel/Hero3DModel'));
+import { Button, Container, Stack, Title } from '@mantine/core';
 import { Link } from 'react-router-dom';
+import Loading from '@/Shared/Components/Loader/Loader';
 
 export const Home = () => {
   return (
@@ -25,9 +24,11 @@ export const Home = () => {
           </Link>
         </Stack>
       </Container>
-      <Box h={'60vh'} w={'100%'}>
+      <Stack h={'60vh'} w={'100%'} justify="center" align="center">
+        <Suspense fallback={<Loading />}>
           <Hero3DModel />
-        </Box>
+        </Suspense>
+      </Stack>
     </GreenBackground>
   );
 };
