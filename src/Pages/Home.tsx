@@ -3,7 +3,7 @@ import { GreenBackground } from '@/Layouts';
 const Hero3DModel = lazy(() => import('@/Shared/Components/Hero3DModel/Hero3DModel'));
 import { Button, Container, Stack, Title } from '@mantine/core';
 import { Link } from 'react-router-dom';
-import Loading from '@/Shared/Components/Loader/Loader';
+import Loading from '@/Shared/Components/Loading/Loading';
 
 export const Home = () => {
   return (
@@ -24,7 +24,12 @@ export const Home = () => {
           </Link>
         </Stack>
       </Container>
-      <Stack h={'60vh'} w={'100%'} justify="center" align="center">
+      <Stack
+        h={'60vh'}
+        w={'100%'}
+        justify="center"
+        align="center"
+      >
         <Suspense fallback={<Loading />}>
           <Hero3DModel />
         </Suspense>

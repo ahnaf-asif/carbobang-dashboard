@@ -1,10 +1,11 @@
 import { ActionIcon, Box, Flex, Group, Image, Stack, Text, Title } from '@mantine/core';
-import { Fragment, useState } from 'react';
+import { Fragment, Suspense, lazy, useState } from 'react';
 import { GreenBackground } from '@/Layouts';
 import { StyledDashboardButton, StyledDashboardDrawer } from './Styles';
 import { useDisclosure } from '@mantine/hooks';
-import DashboardMap from '@/Shared/Components/DashboardMap/DashboardMap';
+const DashboardMap = lazy(() => import('@/Shared/Components/DashboardMap/DashboardMap'));
 import { IconChevronsLeft } from '@tabler/icons-react';
+import Loading from '@/Shared/Components/Loading/Loading';
 
 const geotiffFileArray = [
   {
@@ -60,8 +61,14 @@ export const Dashboard = () => {
       <Flex align="center" justify="space-around">
         <Group gap={10} align="end">
           <Image src={geotiffFile?.button} alt="Button 1" w={'100'} mb={30} />
-          <Stack style={{ height: '500px', width: '800px', color: 'white' }}>
-            <DashboardMap geotiffFile={geotiffFile} />
+          <Stack
+            align="center"
+            justify="center"
+            style={{ height: '500px', width: '800px', color: 'white' }}
+          >
+            <Suspense fallback={<Loading />}>
+              <DashboardMap geotiffFile={geotiffFile} />
+            </Suspense>
             <Text>{geotiffFile.text}</Text>
           </Stack>
         </Group>
