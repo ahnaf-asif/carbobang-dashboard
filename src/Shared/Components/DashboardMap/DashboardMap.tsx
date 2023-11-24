@@ -3,13 +3,17 @@ import GeoRasterLayer from 'georaster-layer-for-leaflet';
 import parse_georaster from 'georaster';
 import L, { CRS } from 'leaflet';
 import 'leaflet/dist/leaflet.css';
+import Loading from '../Loading/Loading';
+import { Stack } from '@mantine/core';
 
 export default function DashboardMap({
   geotiffFile
 }: {
   geotiffFile: { label: string; file: string; button: string; text: string };
 }) {
+  const [loading, setLoading] = useState(true);
   useEffect(() => {
+    setLoading(true);
     const map = L.map('mapid', {
       crs: CRS.Simple
     }).setZoom(0);
@@ -35,9 +39,11 @@ export default function DashboardMap({
               const paddedBounds = originalBounds.pad(paddingRatio);
 
               map.fitBounds(paddedBounds);
+              setLoading(false);
             });
         } catch (error) {
           console.log(error);
+          setLoading(false);
         }
       });
 
@@ -46,5 +52,14 @@ export default function DashboardMap({
     };
   }, [geotiffFile]);
 
-  return <div id="mapid" style={{ width: '100%', height: '100%' }} />;
+  return (
+    <>
+      {loading && (
+        <Stack align="center" justify="center" style={{ height: '500px', width: '800px' }}>
+          <Loading />
+        </Stack>
+      )}
+      <div id="mapid" style={{ width: '100%', height: '100%', opacity: loading ? '0' : '1' }} />
+    </>
+  );
 }
